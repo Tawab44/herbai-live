@@ -400,7 +400,7 @@ Google Gemini API (chatbot) multiple models
 
 
 ---🛠️ Installation & Setup---
-This is production code (no localhost)for locally running ml model+node server go to--
+This is production code for Herbnet (no localhost)for locally running ml model+node server go to for full project--
 https://github.com/Tawab44/myherb
  
  
