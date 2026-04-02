@@ -398,6 +398,68 @@ AI Services
 
 Google Gemini API (chatbot) multiple models
 
+🚀 Deployment 
+
+Herb AI uses a **three-tier cloud deployment** architecture across three separate free-tier platforms.
+
+---
+
+## Architecture Overview
+
+```
+User Browser
+     │
+     ▼
+┌─────────────────────┐
+│  Frontend (Vercel)  │  ← React + Vite
+│  myherb-live.vercel │
+└────────┬────────────┘
+         │ REST API calls
+         ▼
+┌─────────────────────┐
+│  Backend (Render)   │  ← Node.js / Express
+│  MongoDB Atlas      │  ← Cloud Database
+└────────┬────────────┘
+         │ @gradio/client
+         ▼
+┌─────────────────────────────────┐
+│  ML Model (Hugging Face Spaces) │  ← PyTorch Fusion CNN + Gradio
+└─────────────────────────────────┘
+```
+
+### Files required in the Space:
+app.py
+model.pt
+requirements.txt
+
+> ⚠️ **Cold Start Warning:** Free-tier HF Spaces go to sleep after inactivity. The first request after idle may take 30–60 seconds to respond.
+
+---
+⚙️ Backend — Render
+
+The Node.js/Express backend handles authentication, herb data, queries, chatbot, and email. It connects to MongoDB Atlas.
+
+### Notes:
+
+- Render free tier **spins down after 15 minutes of inactivity** — first request after idle may be slow (~30s).
+
+---
+
+🌐 Frontend — Vercel
+
+**URL:** https://herbai-live.vercel.app/
+
+The React + Vite frontend is deployed on Vercel with automatic deployments triggered on every push to the `master` branch.
+
+
+- The `@gradio/client` package must be listed in `package.json` dependencies (not devDependencies) for Vercel to install it during build.
+- Vite cache issues after dependency changes: delete `node_modules/.vite` and restart dev server.
+
+
+🗄️ Database — MongoDB Atlas
+
+The backend connects to a free **M0 MongoDB Atlas cluster**.
+
 
 ---🛠️ Installation & Setup---
 This is production code for Herbnet (no localhost)for locally running ml model+node server go to for full project--
