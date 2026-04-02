@@ -426,6 +426,9 @@ User Browser
 │  ML Model (Hugging Face Spaces) │  ← PyTorch Fusion CNN + Gradio
 └─────────────────────────────────┘
 ```
+ 🤖 ML Model — Hugging Face Spaces
+
+The ML model (`model.pt`) is a TorchScript Fusion CNN (ResNet50 + InceptionV3) and is too large to host on Render's free tier due to RAM constraints. It is deployed  on Hugging Face Spaces.
 
 ### Files required in the Space:
 app.py
